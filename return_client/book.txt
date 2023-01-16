@@ -1,0 +1,12 @@
+rsf
+select * from sales_return,goods,type,storeman,car where order_id=goods.id and car_id=car.id and storeman_id=storeman.id and type.id=goods.category_id;
+//查询
+select * from sales_return where order_id=(select id from goods where goods.code=6927770901297)
+and storeman_id=1 and car_id=1 and return_time=utc_date();
+//添加
+insert into sales_return(order_id,return_quantity,car_id,storeman_id,return_time,is_normal) value(
+	(select goods.id from goods where goods.code=6927770901297),1,1,1,utc_date(),true);
+//更新
+update sales_return set return_quantity=return_quantity+1
+where order_id=(select id from goods where goods.code=6927770901297)
+and car_id=1 and storeman_id=1 and return_time=utc_date();
