@@ -42,7 +42,7 @@ function Index(props) {
         if (isSearch) {
             const {value} = result
             // console.log('in order select', value)
-            axios.get("/selectInformation?return_time=" + value['date'] + "&car_id=" + value['truck'] + "").then(response => {
+            axios.get("/api1/selectInformation?return_time=" + value['date'] + "&car_id=" + value['truck'] + "").then(response => {
                 // console.log(response)
                 // tablevalue.length=0
                 // response.data.map(row => {
@@ -61,7 +61,7 @@ function Index(props) {
         if (isAdd) {
             const {value} = goodresult
             // console.log('in order goodexplore', value, typeof value, value['good_number'])
-            axios.get("/addInformation?truck_number=" + value['truck_number'] + "&storeman_number=" + value['storeman_number'] + "&timeLag="+timeLag).then(response => {
+            axios.get("/api1/addInformation?truck_number=" + value['truck_number'] + "&storeman_number=" + value['storeman_number'] + "&timeLag="+timeLag).then(response => {
                 // console.log(response)
                 // debugger
                 // tablevalue.length=0
@@ -124,7 +124,7 @@ function Index(props) {
         //暂存当前表单信息
         setTempList(tablevalue)
         //请求后端api，修改数据
-        axios.post("/addInformation/update?return_quantity="+lineCount+"&update_operater="+goodresult['value']['storeman_number']+"&id="+lineData['id']).then(res=>{
+        axios.post("/api1/addInformation/update?return_quantity="+lineCount+"&update_operater="+goodresult['value']['storeman_number']+"&id="+lineData['id']).then(res=>{
             console.log(res.data)
             handleOpenTip('success','修改成功')
         }).catch(err=>{
@@ -154,9 +154,9 @@ function Index(props) {
         //暂存当前表单信息
         setTempList(tablevalue.filter(row=>(row['id']!==lineData['id'])))
         //请求后端api，先存储，后删除
-        axios.post("/addInformation/stub?id="+lineData['id']+"&car_info="+lineData['car_info']+"&storeman_id="+goodresult['value']['storeman_number']+"&code="+lineData['code']+"&gname="+lineData['gname']+"&return_type="+lineData['return_type']+"&return_quantity="+lineData['return_quantity']+"&return_time="+lineData['return_time']).then(res=>{
+        axios.post("/api1/addInformation/stub?id="+lineData['id']+"&car_info="+lineData['car_info']+"&storeman_id="+goodresult['value']['storeman_number']+"&code="+lineData['code']+"&gname="+lineData['gname']+"&return_type="+lineData['return_type']+"&return_quantity="+lineData['return_quantity']+"&return_time="+lineData['return_time']).then(res=>{
             console.log(res.data)
-            axios.post("/addInformation/delete?id="+lineData['id']).then(res=>{
+            axios.post("/api1/addInformation/delete?id="+lineData['id']).then(res=>{
                 console.log(res.data)
                 handleOpenTip('success','删除成功')
             }).catch(err=>{

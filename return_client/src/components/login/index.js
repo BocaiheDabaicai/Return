@@ -33,7 +33,7 @@ export default function Index(props) {
         //     username: data.get('username'),
         //     password: data.get('password'),
         // });
-        axios.get("/selectInformation/user?username='"+data.get('username')+"'&password="+data.get('password')).then(response=>
+        axios.get("/api1/selectInformation/user?username='"+data.get('username')+"'&password="+data.get('password')).then(response=>
         {
             console.log(typeof response.data,response.data[0])
             setInformation([response.data[0]['bus_division'],response.data[0]['division_name'],response.data[0]['id']])

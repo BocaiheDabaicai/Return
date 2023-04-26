@@ -246,6 +246,23 @@ router.get("/user", function (req, res, next) {
         res.send(dataJson)
     })
 });
+router.get("/storeman", function (req, res, next) {
+    console.log(typeof req.query['username'],req.query['username'])
+    console.log(typeof req.query['password'],req.query['password'])
+    var sql=`select *
+            from user
+            where id = ${req.query['id']}`
+    connection.query(sql, function (err, result) {
+        if (err) {
+            console.log('select error!!', err.message)
+            return;
+        }
+        var dataString = JSON.stringify(result)
+        var dataJson = JSON.parse(dataString)
+        // console.log(dataJson)
+        res.send(dataJson)
+    })
+});
 router.get("/table", function (req, res, next) {
     console.log(typeof req.query['division'],req.query['division'])
     console.log(typeof req.query['carname'],req.query['carname'])
